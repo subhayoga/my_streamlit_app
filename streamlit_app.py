@@ -1,35 +1,21 @@
+from ucimlrepo import fetch_ucirepo
 import numpy as np
 import altair as alt
 import pandas as pd
 import streamlit as st
 
-st.header('st.write')
+st.header("Subha's App")
 
-# Example 1
 
-st.write('Hello, *World!* :sunglasses:')
+# fetch dataset
+wine_quality = fetch_ucirepo(id=186)
 
-# Example 2
+# data (as pandas dataframes)
+X = wine_quality.data.features
+y = wine_quality.data.targets
 
-st.write(1234)
+# metadata
+st.write(wine_quality.metadata)
 
-# Example 3
-
-df = pd.DataFrame({
-    'first column': [1, 2, 3, 4],
-    'second column': [10, 20, 30, 40]
-})
-st.write(df)
-
-# Example 4
-
-st.write('Below is a DataFrame:', df, 'Above is a dataframe.')
-
-# Example 5
-
-df2 = pd.DataFrame(
-    np.random.randn(200, 3),
-    columns=['a', 'b', 'c'])
-c = alt.Chart(df2).mark_circle().encode(
-    x='a', y='b', size='c', color='c', tooltip=['a', 'b', 'c'])
-st.write(c)
+# variable information
+st.write(wine_quality.variables)
